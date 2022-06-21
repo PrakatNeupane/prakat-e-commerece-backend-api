@@ -1,0 +1,8 @@
+########## admin api ###########
+
+### get method
+GET http://localhost:8000/api/v1/admin/
+### get method
+POST http://localhost:8000/api/v1/admin/
+### get method
+PATCH http://localhost:8000/api/v1/admin/
