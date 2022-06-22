@@ -1,4 +1,5 @@
 import express from 'express'
+import { newAdminValidation } from '../middlewares/adminValidation.js'
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -8,7 +9,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', newAdminValidation, (req, res) => {
     res.json({
         status: 'success',
         message: 'POST got hit to the admin router'
