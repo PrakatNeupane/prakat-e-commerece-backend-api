@@ -21,7 +21,7 @@ app.use((err, req, res, next) => {
     console.log(err)
     res.json({
         status: 'error',
-        message: err.message,
+        message: "❌" + err.message,
     })
 })
 

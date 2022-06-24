@@ -13,31 +13,30 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', newAdminValidation, async (req, res, next) => {
+    try {
+        console.log(req.body)
+        const hashPassword = encryptPassword(req.body.password)
+        req.body.password = hashPassword // assigning the value of password in the object to hashPassword so that the database does not show the real password
+        throw new Error("testing error")
+        const result = await insertAdmin(req.body)
 
-    // try {
-    //     const hashPassword = encryptPassword(req.body.password)
-    //     req.body.password = hashPassword
+        console.log(result)
 
-    //     // create a unique email validation code
-    //     req.body.emailValidationCode = uuidv4()
-    //     const result = await insertAdmin(req.body)
-    //     console.log(result)
+        result?._id ?
+            res.json({
+                status: 'success',
+                message: 'POST got hit to the admin router',
+            })
+            : res.json({
+                status: 'error',
+                message: 'Unable to create new admin, please try again later or contact the admin',
+            })
 
-    //     if (result?._id) {
-    //         // create a unique url and send it to the user email
+    } catch (error) {
+        next(error)
+    }
 
-    //     }
-    // } catch (error) {
 
-    // }
-    const hashPassword = encryptPassword(req.body.password)
-
-    res.json({
-        status: 'success',
-        message: 'POST got hit to the admin router',
-        hashPassword
-        // result,
-    })
 })
 router.patch('/', (req, res) => {
     res.json({
