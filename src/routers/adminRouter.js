@@ -16,6 +16,8 @@ router.post('/', newAdminValidation, async (req, res, next) => {
     try {
         const hashPassword = encryptPassword(req.body.password)
         req.body.password = hashPassword // assigning the value of password in the object to hashPassword so that the database does not show the real password
+
+
         const result = await insertAdmin(req.body)
 
         console.log(result)
