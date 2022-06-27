@@ -14,10 +14,8 @@ router.get('/', (req, res) => {
 
 router.post('/', newAdminValidation, async (req, res, next) => {
     try {
-        console.log(req.body)
         const hashPassword = encryptPassword(req.body.password)
         req.body.password = hashPassword // assigning the value of password in the object to hashPassword so that the database does not show the real password
-        throw new Error("testing error")
         const result = await insertAdmin(req.body)
 
         console.log(result)
@@ -25,7 +23,7 @@ router.post('/', newAdminValidation, async (req, res, next) => {
         result?._id ?
             res.json({
                 status: 'success',
-                message: 'POST got hit to the admin router',
+                message: 'New admin created successfully',
             })
             : res.json({
                 status: 'error',
@@ -33,6 +31,11 @@ router.post('/', newAdminValidation, async (req, res, next) => {
             })
 
     } catch (error) {
+        error.status = 500
+        if (error.message.includes('E11000 duplicate key error')) {
+            error.message = "Email already exists"
+            error.status = 200
+        }
         next(error)
     }
 

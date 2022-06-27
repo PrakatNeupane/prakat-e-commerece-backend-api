@@ -14,3 +14,13 @@
         inserver:
         receive the unique email validation code
         check if the code is valid and exists in the database
+
+        if not{
+            response invalid request message
+        }
+
+        if exit {
+            update user status from inactive to active in the database
+            send email confirmation to the user saying the account is active
+            response successful request message to the client app
+        }

@@ -19,9 +19,10 @@ app.use('/api/v1/admin', adminRouter)
 // error handling
 app.use((err, req, res, next) => {
     console.log(err)
+    res.status(err.status || 400)
     res.json({
         status: 'error',
-        message: "❌" + err.message,
+        message: "❌ ❌" + err.message,
     })
 })
 

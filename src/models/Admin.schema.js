@@ -29,6 +29,10 @@ const AdminSchema = new mongoose.Schema({
         unique: true,
         index: 1,
     },
+    emailValidationCode: {
+        type: String,
+        default: "",
+    },
     phone: {
         type: String,
         required: true,
