@@ -3,18 +3,18 @@ import nodemailer from 'nodemailer'
 export const sendMail = async (emailData) => {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: process.env.EMAIL_SMTP,
+        port: process.env.EMAIL_PORT,
         auth: {
-            user: 'shaun.stroman33@ethereal.email',
-            pass: 'xNUvwJcxXCknK76ZVG'
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
         }
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: '"Laptop store 👻" <juwan.aufderhar72@ethereal.email>', // sender address
-        to: "juwan.aufderhar72@ethereal.email", // list of receivers
+        from: '"Laptop store 👻" <shaun.stroman33@ethereal.email>', // sender address
+        to: "shaun.stroman33@ethereal.email", // list of receivers
         subject: "Please verify your email ", // Subject line
         text: `hi there, please follow the linke to verify your email ${emailData.url}`, // plain text body
         html: `

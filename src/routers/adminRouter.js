@@ -1,9 +1,10 @@
-import express from 'express'
+import express, { json } from 'express'
 import { encryptPassword } from '../../helpers/bcrypthelper.js'
 import { newAdminValidation } from '../middlewares/adminValidation.js'
 import { insertAdmin } from '../models/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
 import { uuid } from 'uuidv4'
+import { sendMail } from '../../helpers/emailHelper.js'
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -27,7 +28,11 @@ router.post('/', newAdminValidation, async (req, res, next) => {
 
         if (result?._id) {
             // create unique url and send it to the user email
-            const url = `${ROOT_URL}/admin/verify-email/?c=${result.emailValidationCode}&e=${result.email}`
+            const url = `${process.env.ROOT_URL}/admin/verify-email/?c=${result.emailValidationCode}&e=${result.email}`
+            console.log(result.emailValidationCode)
+            // send email to the user
+            sendMail({ fName: result.fName, url })
+
             res.json({
                 status: 'success',
                 message: 'New admin created successfully',
@@ -49,6 +54,17 @@ router.post('/', newAdminValidation, async (req, res, next) => {
         next(error)
     }
 
+
+})
+
+// email verification router
+
+router.post('/email-verification', (req, res) => {
+    console.log(req.body)
+    res.json({
+        status: 'success',
+        message: 'email successfully verified, you may login now'
+    })
 
 })
 router.patch('/', (req, res) => {

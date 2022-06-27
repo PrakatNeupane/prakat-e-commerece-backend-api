@@ -2,18 +2,26 @@
 
 ### get method
 GET http://localhost:8000/api/v1/admin/
-### get method
+### post admin method
 POST http://localhost:8000/api/v1/admin/
 Content-Type: application/json
 
 {
-    "fName": "Prabal",
+    "fName": "Sita",
     "lName": "Neupane",
-    "email": "prabal@gmail.com",
+    "email": "sita@gmail.com",
     "phone": "1234567890",
     "address": "sydenn",
     "dob": "01/01/2020",
     "password": "1234"
+}
+### post admin email verification api
+POST http://localhost:8000/api/v1/admin/email-verification
+Content-Type: application/json
+
+{
+    "email": "sita@gmail.com",
+    "emailValidationCode" : "35049006-182b-40d3-bdc1-9f226249ca70"
 }
 ### get method
 PATCH http://localhost:8000/api/v1/admin/
