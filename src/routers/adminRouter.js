@@ -3,6 +3,7 @@ import { encryptPassword } from '../../helpers/bcrypthelper.js'
 import { newAdminValidation } from '../middlewares/adminValidation.js'
 import { insertAdmin } from '../models/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
+import { uuid } from 'uuidv4'
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -17,6 +18,8 @@ router.post('/', newAdminValidation, async (req, res, next) => {
         const hashPassword = encryptPassword(req.body.password)
         req.body.password = hashPassword // assigning the value of password in the object to hashPassword so that the database does not show the real password
 
+        // create unique email validation code
+        req.body.emailValidationCode = uuidv4()
 
         const result = await insertAdmin(req.body)
 
