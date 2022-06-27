@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import { encryptPassword } from '../../helpers/bcrypthelper.js'
-import { newAdminValidation } from '../middlewares/adminValidation.js'
-import { insertAdmin } from '../models/Admin.model.js'
+import { emailVerificationValidation, newAdminValidation } from '../middlewares/adminValidation.js'
+import { insertAdmin, updateAdmin } from '../models/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
 import { uuid } from 'uuidv4'
 import { sendMail } from '../../helpers/emailHelper.js'
@@ -59,12 +59,25 @@ router.post('/', newAdminValidation, async (req, res, next) => {
 
 // email verification router
 
-router.post('/email-verification', (req, res) => {
+router.post('/email-verification', emailVerificationValidation, async (req, res) => {
     console.log(req.body)
-    res.json({
-        status: 'success',
-        message: 'email successfully verified, you may login now'
-    })
+    const filter = req.body
+    const update = { status: "active" }
+
+    const result = await updateAdmin(filter, update)
+    console.log(result)
+
+    result?._id ?
+        res.json({
+            status: "success",
+            message: "email successfully verified, you may login now"
+        }) :
+        res.json({
+            status: "error",
+            message: "invalid or expierd verification link"
+        })
+
+
 
 })
 router.patch('/', (req, res) => {
