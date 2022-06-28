@@ -7,9 +7,9 @@ POST http://localhost:8000/api/v1/admin/
 Content-Type: application/json
 
 {
-    "fName": "Sita",
-    "lName": "Neupane",
-    "email": "sita@gmail.com",
+    "fName": "Kaushalya",
+    "lName": "Khatiwoda",
+    "email": "kaushalya@gmail.com",
     "phone": "1234567890",
     "address": "sydenn",
     "dob": "01/01/2020",
@@ -20,8 +20,8 @@ POST http://localhost:8000/api/v1/admin/email-verification
 Content-Type: application/json
 
 {
-    "email": "sita@gmail.com",
-    "emailValidationCode" : "35049006-182b-40d3-bdc1-9f226249ca70"
+    "email": "kaushalya@gmail.com",
+    "emailValidationCode" : "3aab10bc-ef56-4be1-a9b4-5aded12dde8f"
 }
 ### get method
 PATCH http://localhost:8000/api/v1/admin/

@@ -25,6 +25,8 @@ router.post('/', newAdminValidation, async (req, res, next) => {
         const result = await insertAdmin(req.body)
 
         console.log(result)
+        console.log(result?.emailValidationCode)
+
 
         if (result?._id) {
             // create unique url and send it to the user email
@@ -35,7 +37,8 @@ router.post('/', newAdminValidation, async (req, res, next) => {
 
             res.json({
                 status: 'success',
-                message: 'New admin created successfully',
+                message: 'Please verify your email first.',
+                result,
             })
         }
         else {
@@ -53,8 +56,6 @@ router.post('/', newAdminValidation, async (req, res, next) => {
         }
         next(error)
     }
-
-
 })
 
 // email verification router
@@ -76,10 +77,8 @@ router.post('/email-verification', emailVerificationValidation, async (req, res)
             status: "error",
             message: "invalid or expierd verification link"
         })
-
-
-
 })
+
 router.patch('/', (req, res) => {
     res.json({
         status: 'success',
