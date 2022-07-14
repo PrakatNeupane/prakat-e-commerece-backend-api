@@ -23,11 +23,11 @@ const AdminSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
+        index: 1,
         required: true,
         trim: true,
         maxLength: [50, 'Email must be less than 50 characters'],
-        unique: true,
-        index: 1,
     },
     emailValidationCode: {
         type: String,

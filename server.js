@@ -2,12 +2,18 @@ import express from 'express'
 import { dbConnect } from './src/dbconfig/dbconfig.js'
 const app = express()
 import "dotenv/config"
+import cors from 'cors'
+import morgan from 'morgan'
+import helmet from "helmet";
 
 
 const PORT = process.env.PORT || 8000
 
 // use middlewares
 app.use(express.json())
+app.use(cors())
+app.use(helmet())
+app.use(morgan('dev'))
 
 // mongodb connect
 dbConnect()
@@ -15,6 +21,12 @@ dbConnect()
 // routers
 import adminRouter from './src/routers/adminRouter.js'
 app.use('/api/v1/admin', adminRouter)
+
+app.get("/", (req, res) => {
+    res.json({
+        message: "you have reached the admin api"
+    })
+})
 
 // error handling
 app.use((err, req, res, next) => {

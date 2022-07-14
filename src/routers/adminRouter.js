@@ -37,8 +37,8 @@ router.post('/', newAdminValidation, async (req, res, next) => {
 
             res.json({
                 status: 'success',
-                message: 'Please verify your email first.',
-                result,
+                message: 'New admin created successfully',
+                // result,
             })
         }
         else {
