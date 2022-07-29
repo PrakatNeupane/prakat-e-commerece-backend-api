@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { encryptPassword } from '../../helpers/bcrypthelper.js'
+import { encryptPassword, verifyPassword } from '../../helpers/bcrypthelper.js'
 import { emailVerificationValidation, loginValidation, newAdminValidation } from '../middlewares/adminValidation.js'
 import { getAdmin, insertAdmin, updateAdmin } from '../models/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -80,7 +80,7 @@ router.post('/email-verification', emailVerificationValidation, async (req, res)
 })
 
 // user login router
-router.post('/login', loginValidation, async (req, res) => {
+router.post('/login', loginValidation, async (req, res, next) => {
 
     try {
         const { email, password } = req.body
