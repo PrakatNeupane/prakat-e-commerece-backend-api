@@ -38,3 +38,11 @@ export const emailVerificationValidation = (req, res, next) => {
     next()
 
 }
+
+export const loginValidation = (req, res, next) => {
+    const schema = Joi.object({
+        email: Joi.string().email({ minDomainSegments: 2 }).required(),
+        password: Joi.string().required(),
+
+    })
+}

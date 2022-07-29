@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import { encryptPassword } from '../../helpers/bcrypthelper.js'
-import { emailVerificationValidation, newAdminValidation } from '../middlewares/adminValidation.js'
-import { insertAdmin, updateAdmin } from '../models/Admin.model.js'
+import { emailVerificationValidation, loginValidation, newAdminValidation } from '../middlewares/adminValidation.js'
+import { getAdmin, insertAdmin, updateAdmin } from '../models/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
 import { uuid } from 'uuidv4'
 import { sendMail } from '../../helpers/emailHelper.js'
@@ -79,11 +79,46 @@ router.post('/email-verification', emailVerificationValidation, async (req, res)
         })
 })
 
-router.patch('/', (req, res) => {
-    res.json({
-        status: 'success',
-        message: 'PATCH got hit to the admin router'
-    })
+// user login router
+router.post('/login', loginValidation, async (req, res) => {
+
+    try {
+        const { email, password } = req.body
+
+        // query get user by email
+        const user = await getAdmin({ email })
+
+        if (user?._id) {
+            if (user.status === "inactive")
+                return res.json({
+                    status: 'error',
+                    message: "Your account is not active yet, please check your email and follow the instructions to activate your email"
+                })
+
+
+            // if user exists, compare passwords 
+            const isMatched = verifyPassword(password, user.password)
+            if (isMatched) {
+                res.json({
+                    status: "success",
+                    message: "User logged in successfully",
+                    user,
+                })
+                return
+            }
+            // if match, process for creating JWT later
+            // for now, send login access message with user
+        }
+        res.status(401).json({
+            status: 'error',
+            message: "Invalid login credentials"
+        })
+        // check for authentication
+    } catch (error) {
+        error.status = 500
+        next(error)
+    }
 })
+
 
 export default router
