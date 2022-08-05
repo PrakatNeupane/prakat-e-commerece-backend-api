@@ -34,3 +34,17 @@ Content-Type: application/json
 
 ### get method
 PATCH http://localhost:8000/api/v1/admin/
+
+### patch admin api
+PATCH http://localhost:8000/api/v1/admin/
+
+#### $$$$$$$$$$$$$ CATEGORY SECTION $$$$$$$$$$$$$$ ####
+
+### post new category
+POST http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+    "parentCat" : "",
+    "catName": "Laptops"
+}
