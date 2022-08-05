@@ -1,14 +1,16 @@
 import Joi from 'joi'
+import { ADDRESS, DOB, EMAIL, FNAME, LNAME, PASSWORD, PHONE, REQUIREDSTR } from './constantValidation.js'
+
 
 export const newAdminValidation = (req, res, next) => {
     const schema = Joi.object({
-        fName: Joi.string().alphanum().required().min(3).max(20),
-        lName: Joi.string().required().min(3).max(20),
-        email: Joi.string().email({ minDomainSegments: 2 }).required(),
-        phone: Joi.string().required().min(10).max(15),
-        dob: Joi.date().allow(null),
-        address: Joi.string().allow(null).allow(""),
-        password: Joi.string().required(),
+        fName: FNAME,
+        lName: LNAME,
+        email: EMAIL,
+        phone: PHONE,
+        dob: DOB,
+        address: ADDRESS,
+        password: PASSWORD,
     })
     const { value, error } = schema.validate(req.body)
     console.log(error?.message)
@@ -24,8 +26,8 @@ export const newAdminValidation = (req, res, next) => {
 
 export const emailVerificationValidation = (req, res, next) => {
     const schema = Joi.object({
-        email: Joi.string().email({ minDomainSegments: 2 }).required(),
-        emailValidationCode: Joi.string().required(),
+        email: EMAIL,
+        emailValidationCode: REQUIREDSTR,
     })
 
     const { error } = schema.validate(req.body)
@@ -41,8 +43,8 @@ export const emailVerificationValidation = (req, res, next) => {
 
 export const loginValidation = (req, res, next) => {
     const schema = Joi.object({
-        email: Joi.string().email({ minDomainSegments: 2 }).required(),
-        password: Joi.string().required(),
+        email: EMAIL,
+        password: PASSWORD,
     })
 
     const { error } = schema.validate(req.body)
