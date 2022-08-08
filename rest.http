@@ -46,6 +46,5 @@ Content-Type: application/json
 
 {
     "parentCat" : "",
-    "catName": "Laptops",
-    "prakat": "rebecca"
+    "catName": "Laptops"
 }

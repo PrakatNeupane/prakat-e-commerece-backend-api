@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import { encryptPassword, verifyPassword } from '../../helpers/bcrypthelper.js'
 import { emailVerificationValidation, loginValidation, newAdminValidation } from '../middlewares/joi-validation/adminValidation.js'
-import { getAdmin, insertAdmin, updateAdmin } from '../models/Admin.model.js'
+import { getAdmin, insertAdmin, updateAdmin } from '../models/admin/Admin.model.js'
 import { v4 as uuidv4 } from 'uuid'
 import { uuid } from 'uuidv4'
 import { sendMail } from '../../helpers/emailHelper.js'
