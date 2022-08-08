@@ -48,3 +48,6 @@ Content-Type: application/json
     "parentCatId" : "62f07709ffc3a3ebb99c8be4",
     "catName": " Furniture  "
 }
+
+### get all active categories 
+GET http://localhost:8000/api/v1/category
