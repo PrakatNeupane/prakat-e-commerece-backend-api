@@ -3,6 +3,7 @@ import { LONGSTR, SHORTSTR, VALIDATOR } from "./constantValidation.js";
 
 export const newCategoryValidation = (req, res, next) => {
     try {
+        console.log("validation")
         const schema = Joi.object({
             parentCat: SHORTSTR.allow(""),
             catName: SHORTSTR.required()

@@ -14,12 +14,5 @@ export const LONGSTR = Joi.string().max(5000)
 
 export const VALIDATOR = (schema, req, res, next) => {
     const { value, error } = schema.validate(req.body)
-    if (error) {
-        console.log(error)
-        return res.json({
-            status: 'error',
-            message: error.message
-        })
-    }
-    next()
+    error ? error.status = 200 && next(error) : next()
 }
