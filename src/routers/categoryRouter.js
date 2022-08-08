@@ -1,6 +1,6 @@
 import express from "express"
 import { newCategoryValidation } from "../middlewares/joi-validation/productCategoryValidation.js"
-import { getCategories, insertCategory } from "../models/category/Category.model.js"
+import { getCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
 const router = express.Router()
 import slugify from "slugify"
 
@@ -24,15 +24,25 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
     }
 })
 
-router.get("/", async (req, res, next) => {
+// update status of a category
+router.patch("/", async (req, res, next) => {
     try {
-        const filter = { status: "active" }
-        const result = await getCategories(filter)
-        res.json({
+        const { _id, status } = req.body
+        if (!_id || !status) {
+            throw new Error("Invalid dataset")
+        }
+
+        const result = await updateCategoryById(_id, { status })
+        result?._id ? res.json({
             status: "success",
             message: "categories results",
             result,
-        })
+        }) :
+            res.json({
+                status: "error",
+                message: "unable to update the category, try again later",
+                result
+            })
     } catch (error) {
         next(error)
     }

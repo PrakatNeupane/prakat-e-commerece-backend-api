@@ -51,3 +51,12 @@ Content-Type: application/json
 
 ### get all active categories 
 GET http://localhost:8000/api/v1/category
+
+### update status of categories
+PATCH  http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+    "_id": "62f077ebffc3a3ebb99c8be8",
+    "status" : "active"
+}
