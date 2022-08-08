@@ -12,6 +12,7 @@
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "react-toastify": "^9.0.7",
+    "slugify": "^1.6.5",
     "uuidv4": "^6.2.13"
   },
   "scripts": {
