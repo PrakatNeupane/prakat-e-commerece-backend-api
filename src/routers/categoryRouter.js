@@ -9,14 +9,17 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
         console.log("pass or fail", req.body) // if we get a console log here, we pass the validation, else we fail
         const slug = slugify(req.body.catName, { lower: true, trim: true })
         console.log(slug)
-        const result = await insertCategory(slug)
+        const result = await insertCategory({ ...req.body, slug })
         console.log(result)
         result?._id ?
             res.json({ status: "success", message: 'New category has been added' }) :
             res.json({ status: "error", message: 'Unable to add the category, please try again later' })
     } catch (error) {
-        console.log(error)
         error.status = 500
+        if (error.message.includes("E11000 duplicate key error collection")) {
+            error.status = 200
+            error.message = "Category already exists, please use a new category name"
+        }
         next(error)
     }
 })
