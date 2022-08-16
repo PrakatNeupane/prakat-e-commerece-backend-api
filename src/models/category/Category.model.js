@@ -11,6 +11,10 @@ export const getCategories = filter => {
     return CategorySchema.find(filter)
 }
 
+export const getAllCategories = () => {
+    return CategorySchema.find();
+};
+
 export const deleteCatById = _id => {
     return CategorySchema.findByIdAndDelete(_id)
 }

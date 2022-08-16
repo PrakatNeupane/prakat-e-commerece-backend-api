@@ -1,6 +1,6 @@
 import express from "express"
 import { newCategoryValidation } from "../middlewares/joi-validation/productCategoryValidation.js"
-import { getCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
+import { getAllCategories, getCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
 const router = express.Router()
 import slugify from "slugify"
 
@@ -20,6 +20,23 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
             error.status = 200
             error.message = "Category already exists, please use a new category name"
         }
+        next(error)
+    }
+})
+
+// return all active categories
+router.get('/', async (req, res, next) => {
+    try {
+        const filter = { status: "active" }
+        const result = await getAllCategories(filter)
+
+        res.json({
+            status: "success",
+            message: "categories result",
+            result,
+        })
+    }
+    catch (error) {
         next(error)
     }
 })
