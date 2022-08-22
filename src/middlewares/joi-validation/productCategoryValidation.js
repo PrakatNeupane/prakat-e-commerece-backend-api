@@ -6,7 +6,8 @@ export const newCategoryValidation = (req, res, next) => {
         console.log("validation")
         const schema = Joi.object({
             parentCatId: SHORTSTR.allow(""),
-            catName: SHORTSTR.required()
+            catName: SHORTSTR.required(),
+            status: SHORTSTR.required(),
         })
         VALIDATOR(schema, req, res, next)
     } catch (error) {

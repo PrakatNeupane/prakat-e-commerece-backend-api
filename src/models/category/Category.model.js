@@ -7,9 +7,9 @@ export const insertCategory = obj => {
 export const getOneCategory = filter => {
     return CategorySchema.findOne(filter)
 }
-export const getCategories = filter => {
-    return CategorySchema.find(filter)
-}
+// export const getCategories = filter => {
+//     return CategorySchema.find(filter)
+// }
 
 export const getAllCategories = () => {
     return CategorySchema.find();

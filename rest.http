@@ -45,8 +45,9 @@ POST http://localhost:8000/api/v1/category
 Content-Type: application/json
 
 {
-    "parentCatId" : "62f07709ffc3a3ebb99c8be4",
-    "catName": " Furniture  "
+    "parentCatId" : "Kitchen appliances",
+    "catName": "Sink",
+    "status":"inactive"
 }
 
 ### get all active categories 

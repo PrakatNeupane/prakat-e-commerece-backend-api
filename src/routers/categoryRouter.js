@@ -1,6 +1,6 @@
 import express from "express"
 import { newCategoryValidation } from "../middlewares/joi-validation/productCategoryValidation.js"
-import { getAllCategories, getCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
+import { getAllCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
 const router = express.Router()
 import slugify from "slugify"
 
