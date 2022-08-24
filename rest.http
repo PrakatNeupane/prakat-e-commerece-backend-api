@@ -45,7 +45,7 @@ POST http://localhost:8000/api/v1/category
 Content-Type: application/json
 
 {
-    "parentCat" : "",
+    "parentCatId" : "",
     "catName": "Small Appliances"
 }
 
