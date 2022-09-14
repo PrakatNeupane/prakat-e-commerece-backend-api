@@ -65,4 +65,12 @@ router.patch("/", async (req, res, next) => {
     }
 })
 
+router.delete("/", (req, res, next) => {
+    try {
+        console.log(req.body);
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default router;
