@@ -68,6 +68,10 @@ router.patch("/", async (req, res, next) => {
 router.delete("/", (req, res, next) => {
     try {
         console.log(req.body);
+        res.json({
+            status: 'success',
+            message: "todo"
+        })
     } catch (error) {
         next(error)
     }
