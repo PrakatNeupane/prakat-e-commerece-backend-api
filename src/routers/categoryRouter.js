@@ -1,6 +1,6 @@
 import express from "express"
 import { newCategoryValidation } from "../middlewares/joi-validation/productCategoryValidation.js"
-import { deleteCatById, getAllCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
+import { deleteCatById, getAllCategories, getCategories, insertCategory, updateCategoryById } from "../models/category/Category.model.js"
 const router = express.Router()
 import slugify from "slugify"
 
@@ -68,6 +68,10 @@ router.patch("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
     try {
         const { _id } = req.body
+        const filter = { parentCatId: _id }
+        const childCats = await getCategories(filter)
+        console.log(childCats)
+        return
         const result = await deleteCatById(_id)
         result?._id ?
             res.json({
