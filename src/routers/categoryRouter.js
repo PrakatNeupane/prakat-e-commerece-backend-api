@@ -70,8 +70,13 @@ router.delete("/", async (req, res, next) => {
         const { _id } = req.body
         const filter = { parentCatId: _id }
         const childCats = await getCategories(filter)
-        console.log(childCats)
-        return
+
+        if (childCats.length) {
+            return res.json({
+                status: "error",
+                message: "There are some child categories depending on this parent category. So, please reallocate those child categories to new parent category and then proceed."
+            })
+        }
         const result = await deleteCatById(_id)
         result?._id ?
             res.json({
