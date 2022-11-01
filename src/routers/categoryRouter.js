@@ -92,4 +92,19 @@ router.delete("/", async (req, res, next) => {
     }
 })
 
+// update category
+router.put("/", newCategoryValidation, async (req, res, next) => {
+    try {
+        const { _id, ...rest } = req.body
+        const result = await updateCategoryById(_id, rest)
+        console.log(result)
+        result?._id ?
+            res.json({ status: "success", message: 'The category has been updated' }) :
+            res.json({ status: "error", message: 'Unable to update the category, please try again later' })
+    } catch (error) {
+
+        next(error)
+    }
+})
+
 export default router;
