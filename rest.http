@@ -60,3 +60,12 @@ Content-Type: application/json
     "_id": "62f07709ffc3a3ebb99c8be4",
     "status" : "active"
 }
+
+# ======= Product api
+### post product
+POST http://localhost:8000/api/v1/products
+Content-Type: application/json
+
+{
+    "name" : "samsung mobile"
+}
