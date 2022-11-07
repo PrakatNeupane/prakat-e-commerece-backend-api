@@ -67,5 +67,11 @@ POST http://localhost:8000/api/v1/products
 Content-Type: application/json
 
 {
-    "name" : "samsung mobile"
+     "name": "MacBook Pro 14 inches", 
+     "sku":"MBP-14", 
+     "description": "lorem ipsum", 
+     "qty": 100,  
+     "price": 3000, 
+     "salesPrice": 1000, 
+     "salesDate": null
 }
