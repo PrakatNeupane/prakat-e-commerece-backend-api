@@ -67,11 +67,11 @@ POST http://localhost:8000/api/v1/products
 Content-Type: application/json
 
 {
-     "name": "MacBook Pro 14 inches", 
-     "sku":"MBP-14", 
+     "name": "mac pro 13 inches", 
+     "sku":"P-13", 
      "description": "lorem ipsum", 
      "qty": 100,  
-     "price": 3000, 
+     "price": 5000, 
      "salesPrice": 1000, 
      "salesDate": null
 }

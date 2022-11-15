@@ -9,12 +9,13 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 100,
-    }, SKU: {
+    }, sku: {
         type: String,
         unique: true,
         index: 1,
         required: true,
         maxlength: 20,
+        trim: true,
     }, slug: {
         type: String,
         unique: true,
@@ -25,7 +26,7 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         maxlength: 5000,
     }, qty: {
-        type: number,
+        type: Number,
         required: true,
         default: 0,
     }, image: [{
@@ -33,7 +34,7 @@ const ProductSchema = new mongoose.Schema({
 
     }], thumbnail: {
         type: String,
-        required: true,
+        // required: true,
         default: "",
     }, price: {
         type: Number,
