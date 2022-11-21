@@ -9,6 +9,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 100,
+        unique: true,
     }, sku: {
         type: String,
         unique: true,
@@ -25,7 +26,13 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 5000,
-    }, qty: {
+    },
+    catId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        default: null,
+    },
+    qty: {
         type: Number,
         required: true,
         default: 0,

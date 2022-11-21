@@ -1,6 +1,6 @@
 import express from 'express'
 import { newProductValidation } from '../middlewares/joi-validation/productCategoryValidation.js'
-import { insertProduct } from '../models/product/Product.model.js'
+import { getMultipleProducts, insertProduct } from '../models/product/Product.model.js'
 import slugify from "slugify"
 
 const router = express.Router()
@@ -25,7 +25,20 @@ router.post('/', newProductValidation, async (req, res, next) => {
             error.message = "Another product with same name or sku exists"
             error.status = 200;
         }
-        console.log(error)
+        next(error)
+    }
+})
+
+router.get('/', async (req, res, next) => {
+    try {
+        const result = await getMultipleProducts()
+        res.json({
+            status: 'success',
+            message: 'products result',
+            result
+        })
+    } catch (error) {
+        error.status = 500
         next(error)
     }
 })

@@ -67,11 +67,14 @@ POST http://localhost:8000/api/v1/products
 Content-Type: application/json
 
 {
-     "name": "mac pro 13 inches", 
-     "sku":"P-13", 
+     "name": "iphone 13 pro", 
+     "sku":"I-13", 
      "description": "lorem ipsum", 
      "qty": 100,  
      "price": 5000, 
      "salesPrice": 1000, 
      "salesDate": null
 }
+
+### get all products
+GET http://localhost:8000/api/v1/products
