@@ -12,7 +12,8 @@ router.post('/', newProductValidation, async (req, res, next) => {
         const slug = slugify(name, { trim: true, lower: true })
         req.body.slug = slug
         const result = await insertProduct(req.body)
-        result?._id ? res.json({
+        console.log(result)
+        result._id ? res.json({
             status: "Success",
             message: "New product has been created"
         }) : res.json({
