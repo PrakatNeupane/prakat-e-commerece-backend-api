@@ -50,10 +50,14 @@ const ProductSchema = new mongoose.Schema({
     }, salesPrice: {
         type: Number,
         default: 0,
-    }, salesDate: {
+    }, salesStartDate: {
         type: Date,
         default: null,
-    }, ratings: {
+    }, salesEndDate: {
+        type: Date,
+        default: null,
+    },
+    ratings: {
         type: Number,
         max: 5,
         default: 5,
