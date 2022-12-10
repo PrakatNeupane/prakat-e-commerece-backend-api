@@ -14,7 +14,7 @@ router.post('/', newProductValidation, async (req, res, next) => {
         const result = await insertProduct(req.body)
         console.log(result)
         result._id ? res.json({
-            status: "Success",
+            status: "success",
             message: "New product has been created"
         }) : res.json({
             status: "Error",
