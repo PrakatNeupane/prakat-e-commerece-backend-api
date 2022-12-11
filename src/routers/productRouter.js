@@ -1,6 +1,6 @@
 import express from 'express'
 import { newProductValidation } from '../middlewares/joi-validation/productCategoryValidation.js'
-import { getMultipleProducts, insertProduct } from '../models/product/Product.model.js'
+import { getMultipleProducts, insertProduct, deleteProduct } from '../models/product/Product.model.js'
 import slugify from "slugify"
 
 const router = express.Router()
@@ -40,6 +40,25 @@ router.get('/', async (req, res, next) => {
         })
     } catch (error) {
         error.status = 500
+        next(error)
+    }
+})
+
+router.delete('/', async (req, res, next) => {
+    try {
+        const { _id } = req.body
+        const result = await deleteProduct(_id)
+        result?._id ?
+            res.json({
+                status: 'success',
+                message: "The product has been deleted"
+            }) :
+            res.json({
+                status: "error",
+                message: "unable to delete. Please try again.",
+
+            })
+    } catch (error) {
         next(error)
     }
 })

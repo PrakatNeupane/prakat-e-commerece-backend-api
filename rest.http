@@ -78,3 +78,4 @@ Content-Type: application/json
 
 ### get all products
 GET http://localhost:8000/api/v1/products
+
