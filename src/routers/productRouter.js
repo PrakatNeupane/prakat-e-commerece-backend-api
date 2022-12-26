@@ -1,6 +1,6 @@
 import express from 'express'
 import { newProductValidation } from '../middlewares/joi-validation/productCategoryValidation.js'
-import { getMultipleProducts, insertProduct, deleteProduct } from '../models/product/Product.model.js'
+import { getMultipleProducts, insertProduct, deleteProduct, deleteMultipleProducts } from '../models/product/Product.model.js'
 import slugify from "slugify"
 
 const router = express.Router()
@@ -46,18 +46,22 @@ router.get('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
     try {
-        const { _id } = req.body
-        const result = await deleteProduct(_id)
-        result?._id ?
-            res.json({
-                status: 'success',
-                message: "The product has been deleted"
-            }) :
-            res.json({
-                status: "error",
-                message: "unable to delete. Please try again.",
-
-            })
+        const ids = req.body
+        if (ids.length) {
+            const result = await deleteMultipleProducts(ids)
+            console.log(result)
+            console.log(result.deletedCount)
+            if (result?.deletedCount) {
+                return res.json({
+                    status: 'success',
+                    message: 'Selected product has been deleted'
+                })
+            }
+        }
+        res.json({
+            status: 'error',
+            message: 'Unable to delete the product, please try again later'
+        })
     } catch (error) {
         next(error)
     }
